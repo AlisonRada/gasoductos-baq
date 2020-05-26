@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "gasoductos"
+    }
+  },
+  "defaultProject": "gasoductos",
+  "cli": {
+    "analytics": "18293900-4f63-4030-9288-3934f50724f2"
+  }
 }
