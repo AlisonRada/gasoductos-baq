@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './auth/navbar/navbar.component';
+import { FooterComponent } from './auth/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterInComponent } from './inside/footer-in/footer-in.component';
+import { NavbarInComponent } from './inside/navbar-in/navbar-in.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterInComponent,
+    NavbarInComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +21,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   exports: [
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    NavbarInComponent,
+    FooterInComponent
   ]
 })
 export class ComponentsModule { }

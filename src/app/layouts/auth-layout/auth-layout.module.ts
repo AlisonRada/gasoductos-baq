@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthLayoutRoutes } from './auth-layout.routing';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
+//Rutas
+import { AuthLayoutRoutes } from './auth-layout.routing';
+
+//Componentes
 import { LoginComponent } from '../../pages/login/login.component';
 import { SignupComponent } from '../../pages/signup/signup.component';
+
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     FormsModule
-    // NgbModule
   ],
   declarations: [
     LoginComponent,

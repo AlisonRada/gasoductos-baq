@@ -3,7 +3,9 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
+//Layouts
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { OperatorLayoutComponent } from './layouts/operator-layout/operator-layout.component';
 
 const routes: Routes = [
   {
@@ -18,6 +20,15 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./layouts/auth-layout/auth-layout.module').then(m => m.AuthLayoutModule)
+      }
+    ]
+  }, {
+    path: '',
+    component: OperatorLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./layouts/operator-layout/operator-layout.module').then(m => m.OperatorLayoutModule)
       }
     ]
   }, {

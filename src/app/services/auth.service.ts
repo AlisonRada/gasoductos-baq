@@ -33,7 +33,6 @@ export class AuthService {
   async SignIn(email: string, password: string) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
-      //this.SetUserData(result.user);
       this.ngZone.run(() => {
         //this.router.navigate(['path']);
       });
@@ -131,10 +130,14 @@ export class AuthService {
   sign up with username/password and sign in with social auth 
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: User, company: string, idType: string, id: number) {
-    database().ref('/empresas/' + user.uid).set({
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`empresas/${user.uid}`);
+    const userData = {
       empresa: company,
       tipo_id: idType,
       id: id
+    };
+    return userRef.set(userData, {
+      merge: true
     });
     this.saveStorage(user);
   }

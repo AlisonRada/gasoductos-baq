@@ -7,6 +7,7 @@ import { ComponentsModule } from './components/components.module';
 
 //Layouts
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { OperatorLayoutComponent } from './layouts/operator-layout/operator-layout.component';
 
 //Services
 import { AuthService } from './services/auth.service';
@@ -22,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    OperatorLayoutComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
