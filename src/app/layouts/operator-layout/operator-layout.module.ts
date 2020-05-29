@@ -8,7 +8,7 @@ import { OperatorLayoutRoutes } from './operator-layout.routing';
 
 //Componentes
 import { TestComponent } from '../../pages/test/test.component';
-import { TestListOperatorComponent } from '../../pages/test-list-operator/test-list-operator.component';
+import { TestListOperatorComponent } from '../../pages/tests-list-operator/tests-list-operator.component';
 
 @NgModule({
   declarations: [

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 //Layouts
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { OperatorLayoutComponent } from './layouts/operator-layout/operator-layout.component';
+import { ChiefLayoutComponent } from './layouts/chief-layout/chief-layout.component'
 
 const routes: Routes = [
   {
@@ -32,9 +33,18 @@ const routes: Routes = [
       }
     ]
   }, {
+    path: '',
+    component: ChiefLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./layouts/chief-layout/chief-layout.module').then(m => m.ChiefLayoutModule)
+      }
+    ]
+  }/*, {
     path: '**',
     redirectTo: 'login'
-  }
+  }*/
 ];
 
 @NgModule({

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-test-list-operator',
-  templateUrl: './test-list-operator.component.html',
-  styleUrls: ['./test-list-operator.component.css']
+  selector: 'app-tests-list-operator',
+  templateUrl: './tests-list-operator.component.html',
+  styleUrls: ['./tests-list-operator.component.css']
 })
 export class TestListOperatorComponent implements OnInit {
 
