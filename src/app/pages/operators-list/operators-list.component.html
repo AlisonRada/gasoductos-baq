@@ -1,1 +1,63 @@
-<p>operators-list works!</p>
+<!-- <div class="row">
+    <div class="col-md-4 offset-md-1">
+      <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByName()">
+        <div class="input-group-append">
+          <span class="input-group-text"><i class="fa fa-search" aria-hidden="true"></i></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 filter-by-age">
+      <div class="row">
+        <div class="col-md-auto title">
+          <span>Filter by age (older than):</span>
+        </div>
+        <div class="col">
+          <span>0 </span>
+          <mat-slider
+            class="age-slider"
+            max="100"
+            min="0"
+            step="1"
+            thumbLabel="true"
+            (ngModel)="ageValue"
+            (change)="rangeChange($event)">
+          </mat-slider>
+          <span> 100</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  
+  <div class="list-group users-list">
+    <div *ngFor="let item of items" class="list-group-item list-group-item-action flex-column align-items-start">
+      <div class="row">
+        <div class="col col-md-2 image-col">
+          <img class="image" [src]="item.payload.doc.data().avatar">
+        </div>
+        <div class="col col-md-7 text-col">
+          <h5 class="mb-1">{{item.payload.doc.data().name}} {{item.payload.doc.data().tipoDocumento}}</h5>
+          <small>Dirección: {{item.payload.doc.data().address}}</small>
+        </div>
+        <div class="col col-md-3 actions-col">
+          <div *ngIf="item.payload.doc.data().available == 1">
+          <button class="btn btn-outline-success action" (click)="setAvailability(item)" type="button">
+            Habilitar <i class="fa fa-check" aria-hidden="true"></i>
+          </button>
+          <button class="btn btn-outline-primary action" (click)="viewDetails(item)" type="button">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div *ngIf="item.payload.doc.data().available == 0">
+          <button class="btn btn-outline-danger action" (click)="setAvailability(item)" type="button">
+            Deshabilitar <i class="fa fa-times" aria-hidden="true"> </i>
+          </button>
+          <button class="btn btn-outline-primary action" (click)="viewDetails(item)" type="button">
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>

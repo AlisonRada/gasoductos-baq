@@ -20,13 +20,23 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewOperatorComponent } from './pages/new-operator/new-operator.component';
+import {MaterialModule  } from "./material/material.module";
+import { HttpClientModule } from '@angular/common/http'; 
+import { HttpModule } from '@angular/http';
 
+import { EditOperatorComponent } from './pages/edit-operator/edit-operator.component';
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
     OperatorLayoutComponent,
-    ChiefLayoutComponent
+    ChiefLayoutComponent,
+    NewOperatorComponent,
+   
+    EditOperatorComponent,
+   
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -37,7 +47,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     ComponentsModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    HttpClientModule
+   
+   
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

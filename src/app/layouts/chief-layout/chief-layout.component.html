@@ -1,5 +1,19 @@
-<div class="main-content">
-    <app-navbar-in></app-navbar-in>
-    <router-outlet></router-outlet>
+<div class="page-container">
+	<div class="side-bar">
+		<ul class="nav flex-column">
+	  	<li class="nav-item">
+	    	<a class="nav-link active" routerLinkActive="active" [routerLink]="['/operators-list']">
+                <i class="fa fa-list"></i>
+				</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link"routerLinkActive="active" [routerLink]="['/new-operator']">
+					<i class="fa fa-plus"></i>
+				</a>
+	  	</li>
+		</ul>
+	</div>
+	<div class="content-container">
+ 		<router-outlet></router-outlet>
+	</div>
 </div>
-<app-footer-in></app-footer-in>

@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 @Component({
   selector: 'app-chief-layout',
   templateUrl: './chief-layout.component.html',
-  styleUrls: ['./chief-layout.component.css']
+  styleUrls: ['./chief-layout.component.scss']
 })
 export class ChiefLayoutComponent implements OnInit {
   test: Date = new Date();

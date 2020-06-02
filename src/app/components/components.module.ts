@@ -6,18 +6,21 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterInComponent } from './inside/footer-in/footer-in.component';
 import { NavbarInComponent } from './inside/navbar-in/navbar-in.component';
+import { AvatarDialogComponent } from './avatar-dialog/avatar-dialog.component';
 
 @NgModule({
   declarations: [
     FooterComponent,
     NavbarComponent,
     FooterInComponent,
-    NavbarInComponent
+    NavbarInComponent,
+    AvatarDialogComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    NgbModule
+    NgbModule,
+    
   ],
   exports: [
     FooterComponent,
