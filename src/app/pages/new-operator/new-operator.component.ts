@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AvatarDialogComponent } from "../../components/avatar-dialog/avatar-dialog.component";
 import { Router } from '@angular/router';
 import { CrudService } from '../../services/lista.service';
+import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-new-operator',
@@ -39,7 +41,8 @@ export class NewOperatorComponent implements OnInit {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private router: Router,
-    public crudService: CrudService
+    public crudService: CrudService,
+    public authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -87,6 +90,7 @@ export class NewOperatorComponent implements OnInit {
     .then(
       res => {
         this.resetFields();
+        this.authService.SignUp(value.name,value.email,value.password,value.tipoDocumento,value.id,"a")
         this.router.navigate(['/operators-list']);
       }
     )

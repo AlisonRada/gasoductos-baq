@@ -7,18 +7,26 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class CrudService {
   constructor(public db: AngularFirestore) {}
 
+  private item;
+  setItem(item){
+    this.item=item;
+  }
+  getItem(){
+    return this.item;
+  }
+  
+
   getAvatars() {
     return this.db.collection('/avatar').valueChanges();
   }
 
-  getUser(userKey: string) {
-    return this.db.collection('employees').doc(userKey).snapshotChanges();
+  getUser(userKey) {
+    return this.db.doc('/employees/'+userKey).snapshotChanges();
     
   }
 
   updateUser(userKey, value) {
-    value.nameToSearch = value.name.toLowerCase();
-    return this.db.collection('employees').doc(userKey).set(value);
+    return this.db.collection('employees').doc(userKey).update(value);
   }
 
   deleteUser(userKey) {
@@ -63,12 +71,12 @@ export class CrudService {
   createUser(value, avatar) {
     return this.db.collection('employees').add({
       name: value.name,
-      nameToSearch: value.name.toLowerCase(),
       tipoDocumento: value.tipoDocumento,
       numeroDocumento: value.id,
       password: value.password,
       address: value.address,
       avatar: avatar,
+      email:value.email,
       companie: 'a',
       available: 1,
     });

@@ -11,33 +11,128 @@
           <button mat-stroked-button class="change-img-button" color="primary" (click)="openDialog()">Change Avatar</button>
         </div>
         <div class="col col-md-8">
-  
-          <form class="edit-form" [formGroup]="exampleForm" novalidate (ngSubmit)="onSubmit(exampleForm.value)">
-  
+          <form
+            class="edit-form"
+            [formGroup]="exampleForm"
+            novalidate
+            (ngSubmit)="onSubmit(exampleForm.value)"
+          >
             <div class="form-group">
               <mat-form-field class="input-style">
-                <input matInput placeholder="Name" class="form-control" formControlName="name">
+                <input
+                  matInput
+                  placeholder="Nombre"
+                  class="form-control"
+                  formControlName="name"
+                />
               </mat-form-field>
               <ng-container *ngFor="let validation of validation_messages.name">
-                <mat-error *ngIf="exampleForm.get('name').hasError(validation.type) && (exampleForm.get('name').dirty || exampleForm.get('name').touched)">{{validation.message}}</mat-error>
+                <mat-error
+                  *ngIf="
+                    exampleForm.get('name').hasError(validation.type) &&
+                    (exampleForm.get('name').dirty ||
+                      exampleForm.get('name').touched)
+                  "
+                  >{{ validation.message }}</mat-error
+                >
               </ng-container>
             </div>
   
             <div class="form-group">
               <mat-form-field class="input-style">
-                <input matInput placeholder="Direccion" class="form-control" formControlName="address">
+                <input
+                  matInput
+                  placeholder="Direccion"
+                  class="form-control"
+                  formControlName="address"
+                />
               </mat-form-field>
-              <ng-container *ngFor="let validation of validation_messages.surname">
-                <mat-error *ngIf="exampleForm.get('address').hasError(validation.type) && (exampleForm.get('address').dirty || exampleForm.get('address').touched)">{{validation.message}}</mat-error>
+              <ng-container
+                *ngFor="let validation of validation_messages.address"
+              >
+                <mat-error
+                  *ngIf="
+                    exampleForm.get('address').hasError(validation.type) &&
+                    (exampleForm.get('address').dirty ||
+                      exampleForm.get('address').touched)
+                  "
+                  >{{ validation.message }}</mat-error
+                >
               </ng-container>
             </div>
-  
+            <div class="form-group">
+              <mat-form-field>
+                <mat-label>Tipo de documento</mat-label>
+                <mat-select [(value)]="selected"  class="form-control"
+                formControlName="tipoDocumento">
+                  <mat-option value="TI">Tarjeta de identidad</mat-option>
+                  <mat-option value="CC">Cedula de ciudadania</mat-option>
+                  <mat-option value="CE">Cedula extranjera</mat-option>
+                  <mat-option value="PA">Pasaporte</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="form-group">
               <mat-form-field class="input-style">
-                <input matInput type="text" placeholder="Identificacion" class="form-control" formControlName="id">
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Número de documento"
+                  class="form-control"
+                  formControlName="id"
+                />
               </mat-form-field>
-              <ng-container *ngFor="let validation of validation_messages.age">
-                <mat-error *ngIf="exampleForm.get('id').hasError(validation.type) && (exampleForm.get('id').dirty || exampleForm.get('id').touched)">{{validation.message}}</mat-error>
+              <ng-container *ngFor="let validation of validation_messages.id">
+                <mat-error
+                  *ngIf="
+                    exampleForm.get('id').hasError(validation.type) &&
+                    (exampleForm.get('id').dirty ||
+                      exampleForm.get('id').touched)
+                  "
+                  >{{ validation.message }}</mat-error
+                >
+              </ng-container>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="input-style">
+                <input
+                  matInput
+                  type="email"
+                  placeholder="Correo electronico"
+                  class="form-control"
+                  formControlName="email"
+                />
+              </mat-form-field>
+              <ng-container *ngFor="let validation of validation_messages.email">
+                <mat-error
+                  *ngIf="
+                    exampleForm.get('email').hasError(validation.type) &&
+                    (exampleForm.get('email').dirty ||
+                      exampleForm.get('email').touched)
+                  "
+                  >{{ validation.message }}</mat-error
+                >
+              </ng-container>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="input-style">
+                <input
+                  matInput
+                  type="password"
+                  placeholder="Contraseña"
+                  class="form-control"
+                  formControlName="password"
+                />
+              </mat-form-field>
+              <ng-container *ngFor="let validation of validation_messages.pasword">
+                <mat-error
+                  *ngIf="
+                    exampleForm.get('password').hasError(validation.type) &&
+                    (exampleForm.get('password').dirty ||
+                      exampleForm.get('password').touched)
+                  "
+                  >{{ validation.message }}</mat-error
+                >
               </ng-container>
             </div>
   

@@ -32,6 +32,7 @@ export class OperatorsListComponent implements OnInit {
   }
 
   viewDetails(item){
+    this.crudService.setItem(item);
     this.router.navigate(['/details/'+ item.payload.doc.id]);
   }
 
