@@ -5,5 +5,6 @@ import { TestListOperatorComponent } from '../../pages/tests-list-operator/tests
 
 export const OperatorLayoutRoutes: Routes = [
   {path: 'tests-list', component: TestListOperatorComponent},
-  {path: 'test', component: TestComponent}
+  {path: 'test', component: TestComponent},
+  //{path: '**', redirectTo: 'tests-list'}
 ];

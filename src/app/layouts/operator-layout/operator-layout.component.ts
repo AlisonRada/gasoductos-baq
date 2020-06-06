@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-operator-layout',
@@ -8,7 +9,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class OperatorLayoutComponent implements OnInit {
   test: Date = new Date();
 
-  constructor() { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
     var html = document.getElementsByTagName("html")[0];

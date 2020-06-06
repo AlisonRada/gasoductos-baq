@@ -2,11 +2,8 @@ import { Injectable, NgZone} from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from './user';
-import { database } from 'firebase';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
-import { UserData } from './userdata';
-
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +11,7 @@ import { UserData } from './userdata';
 export class AuthService {
 
   userData: User;
+  private isCompanie: boolean = false;
 
   constructor(public afs: AngularFirestore, public  afAuth:  AngularFireAuth, public  router:  Router, public ngZone: NgZone) {
     /* Saving user data in localstorage when
@@ -33,8 +31,14 @@ export class AuthService {
   async SignIn(email: string, password: string) {
     try {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password);
+      this.saveStorage(result.user)
+      await this.checkWhoIsSignIn();
       this.ngZone.run(() => {
-        //this.router.navigate(['path']);
+        if (this.isCompanie) {
+          this.router.navigate(['operators-list']);
+        } else {
+          this.router.navigate(['tests-list']);
+        }
       });
       console.log('Logueado')
     } catch (error) {
@@ -44,6 +48,20 @@ export class AuthService {
         icon: 'error',
       });
     }
+  }
+
+  public async checkWhoIsSignIn(){
+    this.isCompanie = false;
+    let user: User = JSON.parse(localStorage.getItem('user'));
+    const usersRef = this.afs.collection('empresas').doc(user.uid)
+    await usersRef.get().toPromise()
+    .then((docSnapshot) => {
+        if (docSnapshot.exists) {
+          this.isCompanie = true
+        } 
+    });
+    //localStorage.setItem('isComapanie', this.isCompanie)
+    return this.isCompanie;
   }
 
   // Sign up with email/password
@@ -76,6 +94,39 @@ export class AuthService {
       });
     } catch (error) {
       window.alert(error.message);
+    }
+  }
+
+  async SignUpEmployee(username: string, email: string, password: string, idType: string, id: number, companyName: string) {
+    let employee: User = null
+    try {
+      const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      result.user.updateProfile({
+        displayName: username
+      })
+      employee = result.user
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'center-start',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        }
+      });
+      Toast.fire({
+        icon: 'success',
+        title: 'Empleado registrado'
+      });
+    } catch (error) {
+      window.alert(error.message);
+    }
+    if (employee !== null) {
+      return employee.uid;
+    } else {
+      return null;
     }
   }
 
@@ -136,16 +187,17 @@ export class AuthService {
       tipo_id: idType,
       id: id
     };
+    this.saveStorage(user);
     return userRef.set(userData, {
       merge: true
     });
-    this.saveStorage(user);
   }
 
   saveStorage(user: User){
     this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+    localStorage.setItem('user', JSON.stringify(this.userData));
+    localStorage.setItem('isCompanie', JSON.stringify(this.isCompanie))
+    //JSON.parse(localStorage.getItem('user'));
   }
 
   // Sign out

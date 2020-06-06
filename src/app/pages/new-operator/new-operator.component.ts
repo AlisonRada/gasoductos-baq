@@ -5,6 +5,7 @@ import { AvatarDialogComponent } from "../../components/avatar-dialog/avatar-dia
 import { Router } from '@angular/router';
 import { CrudService } from '../../services/lista.service';
 import { AuthService } from '../../services/auth.service';
+import { StorageService } from '../../services/storage.service';;
 
 
 @Component({
@@ -15,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
 export class NewOperatorComponent implements OnInit {
 
   exampleForm: FormGroup;
-  avatarLink: string = "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg";
+  avatarLink: any = "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg";
   selected = 'CC';
 
   validation_messages = {
@@ -37,16 +38,23 @@ export class NewOperatorComponent implements OnInit {
   ]
  };
 
+  file: any;
+
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private router: Router,
     public crudService: CrudService,
-    public authService: AuthService
+    public authService: AuthService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit() {
     this.createForm();
+  }
+
+  onSelectFile(event) {
+    this.file = event.target.files[0]
   }
 
   createForm() {
@@ -75,6 +83,7 @@ export class NewOperatorComponent implements OnInit {
 
   resetFields(){
     this.avatarLink = "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg";
+    this.file = undefined;
     this.exampleForm = this.fb.group({
       name: ['', Validators.required ],
       address: ['', Validators.required ],
@@ -86,12 +95,20 @@ export class NewOperatorComponent implements OnInit {
   }
 
   onSubmit(value){
-    this.crudService.createUser(value, this.avatarLink)
-    .then(
-      res => {
-        this.resetFields();
-        this.authService.SignUp(value.name,value.email,value.password,value.tipoDocumento,value.id,"a")
-        this.router.navigate(['/operators-list']);
+    this.authService.SignUpEmployee(value.name,value.email,value.password,value.tipoDocumento,value.id,"a").then(
+      (uid) => {
+        if (uid !== null) {
+          if (this.file!== undefined) {
+            this.storageService.uploadFile(value.email, this.file)
+          }
+          this.crudService.createUser(value, uid, this.avatarLink)
+          .then(
+            res => {
+              this.resetFields();
+              this.router.navigate(['/operators-list']);
+            }
+          )
+        }
       }
     )
   }

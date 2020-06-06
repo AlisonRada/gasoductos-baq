@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -68,8 +68,9 @@ export class CrudService {
    
   }
 
-  createUser(value, avatar) {
-    return this.db.collection('employees').add({
+  createUser(value, uid, avatar) {
+    const userRef: AngularFirestoreDocument<any> = this.db.doc(`employees/${uid}`);
+    const data = {
       name: value.name,
       tipoDocumento: value.tipoDocumento,
       numeroDocumento: value.id,
@@ -79,6 +80,9 @@ export class CrudService {
       email:value.email,
       companie: 'a',
       available: 1,
+    }
+    return userRef.set(data, {
+      merge: true
     });
   }
 }

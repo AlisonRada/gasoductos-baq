@@ -9,5 +9,6 @@ import { EditOperatorComponent } from '../../pages/edit-operator/edit-operator.c
 export const ChiefLayoutRoutes: Routes = [
   { path: 'operators-list', component: OperatorsListComponent },
   { path: 'new-operator', component: NewOperatorComponent },
-  { path: 'details/:id', component: EditOperatorComponent }
+  { path: 'details/:id', component: EditOperatorComponent },
+  { path: '**', redirectTo: 'operators-list'}
 ];
