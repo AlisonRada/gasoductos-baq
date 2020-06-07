@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from './user';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -98,9 +99,21 @@ export class AuthService {
   }
 
   async SignUpEmployee(username: string, email: string, password: string, idType: string, id: number, companyName: string) {
+    let authWorkerApp = firebase.initializeApp(firebase.app().options, 'auth-worker');
+    let authWorkerAuth = firebase.auth(authWorkerApp);
+    authWorkerAuth.setPersistence(firebase.auth.Auth.Persistence.NONE); // disables caching of account credentials
+    
+    authWorkerAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+    });
+
+
     let employee: User = null
     try {
-      const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      const result = await authWorkerAuth.createUserWithEmailAndPassword(email, password);
       result.user.updateProfile({
         displayName: username
       })

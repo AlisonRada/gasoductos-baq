@@ -101,6 +101,7 @@
                   placeholder="Correo electronico"
                   class="form-control"
                   formControlName="email"
+                  readonly
                 />
               </mat-form-field>
               <ng-container *ngFor="let validation of validation_messages.email">
@@ -122,6 +123,7 @@
                   placeholder="Contraseña"
                   class="form-control"
                   formControlName="password"
+                  readonly
                 />
               </mat-form-field>
               <ng-container *ngFor="let validation of validation_messages.pasword">

@@ -5,7 +5,8 @@ import { AvatarDialogComponent } from "../../components/avatar-dialog/avatar-dia
 import { Router } from '@angular/router';
 import { CrudService } from '../../services/lista.service';
 import { AuthService } from '../../services/auth.service';
-import { StorageService } from '../../services/storage.service';;
+import { StorageService } from '../../services/storage.service';import { User } from 'src/app/services/user';
+;
 
 
 @Component({
@@ -50,6 +51,8 @@ export class NewOperatorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let user: User = JSON.parse(localStorage.getItem('user'));
+    console.log(user.uid);
     this.createForm();
   }
 
@@ -95,7 +98,9 @@ export class NewOperatorComponent implements OnInit {
   }
 
   onSubmit(value){
-    this.authService.SignUpEmployee(value.name,value.email,value.password,value.tipoDocumento,value.id,"a").then(
+    let user: User = JSON.parse(localStorage.getItem('user'));
+    let companyName=user.uid;
+    this.authService.SignUpEmployee(value.name,value.email,value.password,value.tipoDocumento,value.id,companyName).then(
       (uid) => {
         if (uid !== null) {
           if (this.file!== undefined) {

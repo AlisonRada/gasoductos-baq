@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CrudService } from '../../services/lista.service';
 import { Router, Params } from '@angular/router';
+import { User } from 'src/app/services/user';
 
 @Component({
   selector: 'app-operators-list',
@@ -11,7 +12,7 @@ import { Router, Params } from '@angular/router';
 export class OperatorsListComponent implements OnInit {
   
   searchValue: string = "";
-  items: Array<any>;
+  items: Array<any>=[];
   age_filtered_items: Array<any>;
   name_filtered_items: Array<any>;
   
@@ -22,7 +23,9 @@ export class OperatorsListComponent implements OnInit {
     this.getData();
   }
   getData(){
-    this.crudService.getUsers('a')
+    let user: User = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+    this.crudService.getUsers(user.uid)
     .subscribe(result => {
       this.items = result;
       console.log(this.items);

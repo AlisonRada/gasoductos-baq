@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,7 @@ export class CrudService {
 
   getUsers(companie) {
     return this.db
-      .collection('employees', (ref) => ref.where('companie', '>=', companie))
+      .collection('employees', (ref) => ref.where('companie', '==', companie))
       .snapshotChanges();
   }
 
@@ -69,6 +70,8 @@ export class CrudService {
   }
 
   createUser(value, uid, avatar) {
+    let user: User = JSON.parse(localStorage.getItem('user'));
+    let companyName=user.uid;
     const userRef: AngularFirestoreDocument<any> = this.db.doc(`employees/${uid}`);
     const data = {
       name: value.name,
@@ -78,7 +81,7 @@ export class CrudService {
       address: value.address,
       avatar: avatar,
       email:value.email,
-      companie: 'a',
+      companie: user.uid,
       available: 1,
     }
     return userRef.set(data, {
