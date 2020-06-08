@@ -21,20 +21,15 @@ import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NewOperatorComponent } from './pages/new-operator/new-operator.component';
 import {MaterialModule  } from "./material/material.module";
 import { HttpClientModule } from '@angular/common/http'; 
-import { HttpModule } from '@angular/http';
 
-import { EditOperatorComponent } from './pages/edit-operator/edit-operator.component';
-import { CreateTestComponent } from './pages/create-test/create-test.component';
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
     OperatorLayoutComponent,
     ChiefLayoutComponent,
-    NewOperatorComponent,   
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

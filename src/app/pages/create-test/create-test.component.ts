@@ -22,7 +22,7 @@ export class CreateTestComponent implements OnInit {
     this.addQuestion("¿Dónde?", opciones, 0)
     this.addQuestion("¿Por qué?", opciones, 0)
     this.addQuestion("¿Entonces??", opciones, 0)
-    let companie = "ibh4KOiOZPaJSPbeVgsWDSz8Y8p2";
+    let companie = "SsTKYWTRsYWx4Frv4i9AKj1qKek1";
     this.addTest("Probando", 10, companie)
   }
 

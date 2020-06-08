@@ -7,6 +7,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { OperatorLayoutComponent } from './layouts/operator-layout/operator-layout.component';
 import { ChiefLayoutComponent } from './layouts/chief-layout/chief-layout.component'
+import { AuthGuard } from './guards/auth.guard';
+import { OperatorGuard } from './guards/operator.guard';
+import { ChiefGuard } from './guards/chief.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +20,7 @@ const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
@@ -26,6 +30,7 @@ const routes: Routes = [
   }, {
     path: '',
     component: OperatorLayoutComponent,
+    canActivateChild: [OperatorGuard],
     children: [
       {
         path: '',
@@ -35,6 +40,7 @@ const routes: Routes = [
   }, {
     path: '',
     component: ChiefLayoutComponent,
+    canActivateChild: [ChiefGuard],
     children: [
       {
         path: '',

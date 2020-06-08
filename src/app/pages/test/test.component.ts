@@ -13,7 +13,7 @@ export class TestComponent implements OnInit {
   public questions: Question[]
 
   constructor(private testService: TestService) {
-    this.testService.getTest("NUOkejYfuhTqg1JOtoiA").subscribe((item)=>{
+    this.testService.getTest("W6EgkSSl9fiG4xalS5y5").subscribe((item)=>{
       this.title = item.payload.data()['title']
       this.questions = item.payload.data()['questions'] as Question[]
     })
