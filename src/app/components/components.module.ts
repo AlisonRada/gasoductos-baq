@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterInComponent } from './inside/footer-in/footer-in.component';
 import { NavbarInComponent } from './inside/navbar-in/navbar-in.component';
 import { AvatarDialogComponent } from './avatar-dialog/avatar-dialog.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AvatarDialogComponent } from './avatar-dialog/avatar-dialog.component';
     NavbarComponent,
     FooterInComponent,
     NavbarInComponent,
-    AvatarDialogComponent
+    AvatarDialogComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

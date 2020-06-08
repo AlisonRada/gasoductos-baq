@@ -100,6 +100,7 @@ export class NewOperatorComponent implements OnInit {
   onSubmit(value){
     let user: User = JSON.parse(localStorage.getItem('user'));
     let companyName=user.uid;
+    console.log(value.email)
     this.authService.SignUpEmployee(value.name,value.email,value.password,value.tipoDocumento,value.id,companyName).then(
       (uid) => {
         if (uid !== null) {

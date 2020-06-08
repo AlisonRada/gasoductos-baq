@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-chief-layout',
@@ -24,4 +25,5 @@ export class ChiefLayoutComponent implements OnInit {
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("bg-default");
   }
+ 
 }

@@ -16,13 +16,17 @@ export class CrudService {
     return this.item;
   }
   
+  getCompanie(companie){
+    console.log("Buscando la empresa de codigo: "+companie)
+    return this.db.collection('empresas').doc(companie).snapshotChanges();
+  }
 
   getAvatars() {
     return this.db.collection('/avatar').valueChanges();
   }
 
   getUser(userKey) {
-    return this.db.doc('/employees/'+userKey).snapshotChanges();
+    return this.db.collection("employees").doc(userKey).snapshotChanges();
     
   }
 
@@ -31,7 +35,10 @@ export class CrudService {
   }
 
   deleteUser(userKey) {
-    return this.db.collection('employees').doc(userKey).delete();
+    return this.db.collection('employees').doc(userKey).delete().then(
+      
+
+    );
   }
 
   getUsers(companie) {

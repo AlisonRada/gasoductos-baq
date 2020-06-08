@@ -10,13 +10,16 @@ import * as firebase from 'firebase';
   providedIn: 'root'
 })
 export class AuthService {
-
+   private authWorkerApp = firebase.initializeApp(firebase.app().options, 'auth-worker');
+   private authWorkerAuth = firebase.auth(this.authWorkerApp);
+  
   userData: User;
   private isCompanie: boolean = false;
 
   constructor(public afs: AngularFirestore, public  afAuth:  AngularFireAuth, public  router:  Router, public ngZone: NgZone) {
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
+    this.authWorkerAuth.setPersistence(firebase.auth.Auth.Persistence.NONE); 
     this.afAuth.authState.subscribe(user => {
       if (user) {
         this.saveStorage(user);
@@ -99,21 +102,19 @@ export class AuthService {
   }
 
   async SignUpEmployee(username: string, email: string, password: string, idType: string, id: number, companyName: string) {
-    let authWorkerApp = firebase.initializeApp(firebase.app().options, 'auth-worker');
-    let authWorkerAuth = firebase.auth(authWorkerApp);
-    authWorkerAuth.setPersistence(firebase.auth.Auth.Persistence.NONE); // disables caching of account credentials
-    
-    authWorkerAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
+    // disables caching of account credentials
+    /* console.log("Vamos a registrar el siguiente correo: "+email)
+    this.authWorkerAuth.createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
-    });
+    }); */
 
 
     let employee: User = null
     try {
-      const result = await authWorkerAuth.createUserWithEmailAndPassword(email, password);
+      const result = await this.authWorkerAuth.createUserWithEmailAndPassword(email, password);
       result.user.updateProfile({
         displayName: username
       })

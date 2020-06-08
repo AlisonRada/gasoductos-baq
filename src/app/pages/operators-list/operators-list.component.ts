@@ -4,6 +4,8 @@ import { CrudService } from '../../services/lista.service';
 import { Router, Params } from '@angular/router';
 import { User } from 'src/app/services/user';
 
+import { ProfileComponent } from "../../components/profile/profile.component";
+
 @Component({
   selector: 'app-operators-list',
   templateUrl: './operators-list.component.html',
@@ -12,7 +14,9 @@ import { User } from 'src/app/services/user';
 export class OperatorsListComponent implements OnInit {
   
   searchValue: string = "";
+  user:any;
   items: Array<any>=[];
+  companie:any;
   age_filtered_items: Array<any>;
   name_filtered_items: Array<any>;
   
@@ -23,16 +27,24 @@ export class OperatorsListComponent implements OnInit {
     this.getData();
   }
   getData(){
-    let user: User = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
-    this.crudService.getUsers(user.uid)
+    this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user);
+    this.crudService.getUsers(this.user.uid)
     .subscribe(result => {
       this.items = result;
       console.log(this.items);
       this.age_filtered_items = result;
       this.name_filtered_items = result;
     })
+   /*  this.crudService.getCompanie(this.user.uid).subscribe(result=>{
+      console.log(result.payload.data().companie);
+      this.companie= result.payload.data().companie;
+
+    }); */
+    
   }
+
+  
 
   viewDetails(item){
     this.crudService.setItem(item);
