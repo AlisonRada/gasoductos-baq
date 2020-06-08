@@ -14,7 +14,7 @@ import { AvatarDialogComponent } from './avatar-dialog/avatar-dialog.component';
     NavbarComponent,
     FooterInComponent,
     NavbarInComponent,
-    AvatarDialogComponent
+    AvatarDialogComponent,
   ],
   imports: [
     CommonModule,

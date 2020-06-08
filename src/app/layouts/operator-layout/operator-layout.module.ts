@@ -9,11 +9,13 @@ import { OperatorLayoutRoutes } from './operator-layout.routing';
 //Componentes
 import { TestComponent } from '../../pages/test/test.component';
 import { TestListOperatorComponent } from '../../pages/tests-list-operator/tests-list-operator.component';
+import { QuestionComponent } from '../../components/question/question.component';
 
 @NgModule({
   declarations: [
     TestComponent,
-    TestListOperatorComponent
+    TestListOperatorComponent,
+    QuestionComponent
   ],
   imports: [
     CommonModule,

@@ -27,16 +27,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { EditOperatorComponent } from './pages/edit-operator/edit-operator.component';
+import { CreateTestComponent } from './pages/create-test/create-test.component';
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
     OperatorLayoutComponent,
     ChiefLayoutComponent,
-    NewOperatorComponent,
-   
-    EditOperatorComponent,
-   
+    NewOperatorComponent,   
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -51,8 +49,6 @@ import { EditOperatorComponent } from './pages/edit-operator/edit-operator.compo
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule
-   
-   
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
