@@ -16,3 +16,5 @@
 <div>
   <app-question *ngFor="let question of questions; index as i" [question]= question [numQuestion]=i (variable)="onLevel($event)"></app-question>
 </div>
+
+<button [disabled]="!complete" (click)="sendTest()">Enviar</button>

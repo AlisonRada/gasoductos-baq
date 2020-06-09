@@ -24,7 +24,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="hover" [routerLink]="testsUser[test.payload.doc.id]===undefined ? ['/test', test.payload.doc.id] : ['/results']" *ngFor="let test of tests; let i = index">
+                    <tr class="hover" [routerLink]="testsUser[test.payload.doc.id]===undefined ? ['/test', test.payload.doc.id] : ['/results', test.payload.doc.id]" *ngFor="let test of tests; let i = index">
                         <th scope="row">{{i+1}}</th>
                         <td>{{test.payload.doc.data().title}}</td>
                         <td>{{test.payload.doc.data().time}}</td>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Test } from '../services/test';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +20,12 @@ export class TestService {
       .collection('tests').doc(testId).snapshotChanges()
   }
 
-  addTestEmployee(uid: string, testId: string){
-    const userRef: AngularFirestoreDocument<any> = this.db.doc(`employees/${uid}/tests/${testId}`);
-    const data = {
-
-    }
-    return userRef.set(data, {
-      merge: true
-    });
+  addTestEmployee(uid: string, testId: string, data: Test){
+    this.db.doc(`employees/${uid}`).snapshotChanges().subscribe((item)=>{
+      let tests = item.payload.data()['tests'] as {};
+      tests[`${testId}`] = data;
+      return this.db.doc(`employees/${uid}`).update({tests: tests})
+    })
   }
 
   getTestsEmployee(uid: string) {

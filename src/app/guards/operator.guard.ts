@@ -16,11 +16,9 @@ export class OperatorGuard implements CanActivateChild {
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(`isCompanie: ${this._authService.isLoggedIn}`)
       if (this._authService.isLoggedIn) {
         return this._authService.checkWhoIsSignIn().then(
           (isCompanie)=>{
-            console.log(`isCompanie: ${isCompanie}`)
             if (isCompanie) {
               this._router.navigate['operators-list']
             } else{
