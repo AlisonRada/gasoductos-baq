@@ -16,12 +16,6 @@ export class TestListOperatorComponent implements OnInit {
   user: User;
   companie: string;
 
-<<<<<<< HEAD
-  constructor(private testService: TestService) {
-    this.testService.getTests("SsTKYWTRsYWx4Frv4i9AKj1qKek1").subscribe((item)=>{
-      this.tests = item
-      this.preloader = false;
-=======
   constructor(private _testService: TestService, private _router: Router) {
     
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -32,25 +26,12 @@ export class TestListOperatorComponent implements OnInit {
         this.tests = item
         this.preloader = false;
       })
->>>>>>> c5bebdbdbd81c8f1025c3b9cb71df124cfe8b6e8
     })
     
     
   }
 
   ngOnInit(): void {
-    
-  }
-
-  openTest(testId: string){
-    this._router.navigate(['test', testId])
-  }
-
-  calculateScore(){
-
-  }
-
-  sendTest(){
     
   }
 

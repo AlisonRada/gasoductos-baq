@@ -12,16 +12,10 @@ export class TestComponent implements OnInit {
 
   public title: string
   public questions: Question[]
+  private answers: number[]
   public preloader: boolean = true;
   public error: boolean = false;
 
-<<<<<<< HEAD
-  constructor(private testService: TestService) {
-    this.testService.getTest("W6EgkSSl9fiG4xalS5y5").subscribe((item)=>{
-      this.title = item.payload.data()['title']
-      this.questions = item.payload.data()['questions'] as Question[]
-    })
-=======
   constructor(private testService: TestService, private _activeRoute: ActivatedRoute) {
     this._activeRoute.params.subscribe( params=>{
       if (params!== undefined){
@@ -29,14 +23,16 @@ export class TestComponent implements OnInit {
           this.preloader = false    
           if (item.payload.data() !== undefined) {
             this.title = item.payload.data()['title']
-            this.questions = item.payload.data()['questions'] as Question[]        
+            this.questions = item.payload.data()['questions'] as Question[]
+            console.log(`Número de preguntas: ${this.questions.length}`)
+            this.answers = new Array(this.questions.length)
+            console.log(this.answers)
           } else {
             this.error = true;
           }
         })        
       }
     })  
->>>>>>> c5bebdbdbd81c8f1025c3b9cb71df124cfe8b6e8
   }
 
   ngOnInit(): void {
@@ -44,6 +40,8 @@ export class TestComponent implements OnInit {
 
   onLevel(x: number[]) {
     console.log(`question: ${x[0]} selected: ${x[1]}`)
+    this.answers[x[0]] = x[1];
+    console.log(this.answers)
   }
 
 }
