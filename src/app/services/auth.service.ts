@@ -57,13 +57,9 @@ export class AuthService {
   public async checkWhoIsSignIn(){
     this.isCompanie = false;
     let user: User = JSON.parse(localStorage.getItem('user'));
-    const usersRef = this.afs.collection('empresas').doc(user.uid)
-    await usersRef.get().toPromise()
-    .then((docSnapshot) => {
-        if (docSnapshot.exists) {
-          this.isCompanie = true
-        } 
-    });
+    if (user.displayName === "chief") {
+      this.isCompanie = true;
+    }
     //localStorage.setItem('isComapanie', this.isCompanie)
     return this.isCompanie;
   }
@@ -72,8 +68,8 @@ export class AuthService {
   async SignUp(username: string, email: string, password: string, idType: string, id: number, companyName: string) {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password);
-      result.user.updateProfile({
-        displayName: username
+      await result.user.updateProfile({
+        displayName: "chief"
       })
       /* Call the sendEmailVerification() function when new user sign up and returns promise */
       //this.SendVerificationMail();
@@ -92,9 +88,10 @@ export class AuthService {
         icon: 'success',
         title: 'Registrado exitosamente. Verificar correo.'
       });
-      this.SetUserData(result.user, companyName, idType, id);
+      this.SetUserData(result.user, username, companyName, idType, id);
+      this.isCompanie = true;
       this.ngZone.run(() => {
-        //this.router.navigate(['path']);
+        this.router.navigate(['operators-list']);
       });
     } catch (error) {
       window.alert(error.message);
@@ -194,13 +191,15 @@ export class AuthService {
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth 
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user: User, company: string, idType: string, id: number) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`empresas/${user.uid}`);
+  SetUserData(user: User, name: string, company: string, idType: string, id: number) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`companies/${user.uid}`);
     const userData = {
+      name: name,
       empresa: company,
       tipo_id: idType,
       id: id
     };
+    console.log(user.displayName)
     this.saveStorage(user);
     return userRef.set(userData, {
       merge: true
@@ -210,15 +209,12 @@ export class AuthService {
   saveStorage(user: User){
     this.userData = user;
     localStorage.setItem('user', JSON.stringify(this.userData));
-    localStorage.setItem('isCompanie', JSON.stringify(this.isCompanie))
-    //JSON.parse(localStorage.getItem('user'));
   }
 
   // Sign out
   async SignOut() {
     await this.afAuth.signOut();
     localStorage.removeItem('user');
-    console.log("Out");
     this.ngZone.run(() => {
       this.router.navigate(['login']);
     });
