@@ -1,1 +1,20 @@
-<p>create-test works!</p>
+<form [formGroup]="testForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <mat-form-field class="full-width">
+      <input formControlName="testTitle" matInput placeholder="Nombre de su test" maxlength="50" [required]="true">
+    </mat-form-field>
+    <h1>Preguntas</h1>
+    <div class="preguntas">
+      <ol class="list-style">
+        <li *ngFor="let questionCtrl of testForm.get('testQuestions')['controls']; let i = index">
+          <div [formGroupName]="i">
+            <mat-form-field class="full-width">
+              <input formControlName="questionTitle" maxlength="200" matInput placeholder="Enunciado"
+                [required]="true">
+            </mat-form-field>
+          </div>
+        </li>
+        </ol>
+
+    </div>
+    
+</form>
