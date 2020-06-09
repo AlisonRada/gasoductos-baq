@@ -20,16 +20,18 @@
                         <th scope="col">Título</th>
                         <th scope="col">Tiempo estimado</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Puntuacion</th>
+                        <th scope="col">Puntuación</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let test of tests; let i = index">
+                    <tr class="hover" [routerLink]="testsUser[test.payload.doc.id]===undefined ? ['/test', test.payload.doc.id] : ['/results']" *ngFor="let test of tests; let i = index">
                         <th scope="row">{{i+1}}</th>
                         <td>{{test.payload.doc.data().title}}</td>
                         <td>{{test.payload.doc.data().time}}</td>
-                        <td>No realizado</td>
-                        <td>0</td>
+                        <td *ngIf="testsUser[test.payload.doc.id]!==undefined">Completado</td>
+                        <td *ngIf="testsUser[test.payload.doc.id]===undefined">Sin realizar</td>
+                        <td *ngIf="testsUser[test.payload.doc.id]!==undefined">{{testsUser[test.payload.doc.id].score}}</td>
+                        <td *ngIf="testsUser[test.payload.doc.id]===undefined">Por calificar</td>
                     </tr>
                   </tbody>
                   
