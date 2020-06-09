@@ -25,6 +25,7 @@ export class CreateTestComponent implements OnInit {
     this.addQuestion("¿Dónde?", opciones, 0)
     this.addQuestion("¿Por qué?", opciones, 0)
     this.addQuestion("¿Entonces??", opciones, 0)
+<<<<<<< HEAD
     let companie = "ibh4KOiOZPaJSPbeVgsWDSz8Y8p2";
     //this.addTest("Probando", 10, companie)
   }
@@ -64,6 +65,10 @@ export class CreateTestComponent implements OnInit {
     while (formArray.length !== 0) {
       formArray.removeAt(0)
     }
+=======
+    let companie = "SsTKYWTRsYWx4Frv4i9AKj1qKek1";
+    this.addTest("Probando", 10, companie)
+>>>>>>> c5bebdbdbd81c8f1025c3b9cb71df124cfe8b6e8
   }
 
   addQuestion(enunciado: string, opciones: string[], respuesta: number){
