@@ -1,6 +1,5 @@
 <div class="main-content">
-    <app-navbar-in></app-navbar-in>
-    <button (click)="auth.SignOut()">Cerrar sesión</button>
+    <app-navbar-in (SignOutEmitter)="auth.SignOut()">></app-navbar-in>
     <router-outlet></router-outlet>
 </div>
 <app-footer-in></app-footer-in>
